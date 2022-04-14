@@ -1,63 +1,47 @@
-class Hello
-  def initialize(name)
-    @name = name
-  end
-
-  def say
-    "Hello, #{@name}!"
-  end
-end
-
-hello = Hello.new('test')
-puts hello.say
-
-
 class User
-  def initialize(name, surname, third_name)
-    @name = name
-    @surname = surname
-    @third_name = third_name
+  def initialize(&block)
+    block.call self
+  end
+
+  def repr_str()
+    return "My role is: #{get_role}"
+  end
+
+  def say()
+    puts repr_str()
+  end
+
+  def to_s()
+    return repr_str()
   end
 
   attr_accessor :name, :surname, :third_name
 end
 
-user = User.new('name', 'surname', 'third_name')
-
-
-class Group
-  def initialize(*users)
-    @users = users
-  end
-
-  def each
-    @users.each { |user| puts user }
+class Author < User
+  def get_role()
+    return 'Author'
   end
 end
 
-group = Group.new(user, User.new('a', 'b', 'c'))
-group.each
-
-
-class Foo
-  def initialize(methods)
-    methods.each { |method| define_singleton_method(method[0]) { method[1] } }
+class Moderator < Author
+  def get_role()
+    return 'Moderator'
   end
 end
 
-foo = Foo.new({ 'one' => 1, 'two' => 2 })
-puts foo.first
-
-
-class List
-  def initialize(*args)
-    @args = args
-  end
-
-  def each(&block)
-    block.call(@args)
+class Admin < Moderator
+  def get_role()
+    return 'Admin'
   end
 end
 
-list = List.new(1, 3, 10, 25)
-list.each { |arg| puts arg }
+
+u = Author.new do |obj|
+  obj.name = 'Name'
+  obj.surname = 'Surname'
+  obj.third_name = 'Third Name'
+end
+
+u.say()
+puts u.to_s()
