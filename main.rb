@@ -1,47 +1,62 @@
-class User
-  def initialize(&block)
-    block.call self
-  end
-
-  def repr_str()
-    return "My role is: #{get_role}"
-  end
-
-  def say()
-    puts repr_str()
-  end
-
-  def to_s()
-    return repr_str()
-  end
-
-  attr_accessor :name, :surname, :third_name
+module TeamRole
+  TEAMLEAD = 1
+  BACKEND = 2
+  FRONTEND = 3
+  QA = 4
+  DESIGNER = 5
 end
 
-class Author < User
-  def get_role()
-    return 'Author'
+class Unit
+  class Employee
+    def initialize(name, surname, role)
+	@name = name
+	@surname = surname
+	@role = role
+    end
+   
+    def to_s
+      "#{@name} #{@surname} #{@role}"
+    end
+
+    attr_reader :name, :surname, :role
+  end
+  
+  def initialize
+    @employees = []
+  end
+
+  def add_employee(employee)
+    @employees.push(employee)
+  end
+  
+  def remove_employee(employee)
+    @employees.delete(employee)
+  end
+
+  def get_by_id(id)
+    return @employees.find(id)
+  end
+
+  def print(filter_by_role = nil)
+    puts @employees
+           .sort { |a, b| "#{a.name} #{a.surname}" <=> "#{b.name} #{b.surname}"}
+           .select { |emp| filter_by_role == nil ? true : emp.role == filter_by_role }
   end
 end
 
-class Moderator < Author
-  def get_role()
-    return 'Moderator'
-  end
-end
+unit = Unit.new
+emp1 = Unit::Employee.new('bb', 'bb', TeamRole::QA)
 
-class Admin < Moderator
-  def get_role()
-    return 'Admin'
-  end
-end
+unit.add_employee(emp1)
+unit.print
 
+puts '------'
 
-u = Author.new do |obj|
-  obj.name = 'Name'
-  obj.surname = 'Surname'
-  obj.third_name = 'Third Name'
-end
+emp2 = Unit::Employee.new('aa', 'aa', TeamRole::TEAMLEAD)
+unit.add_employee(emp2)
 
-u.say()
-puts u.to_s()
+unit.print(TeamRole::TEAMLEAD)
+
+puts '------'
+
+unit.print
