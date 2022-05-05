@@ -10,3 +10,4 @@
 8. [Lab-8](https://github.com/neistow/ruby-on-snails/tree/lab-8)
 9. [Lab-9](https://github.com/neistow/ruby-on-snails/tree/lab-9)
 10. [Lab-10](https://github.com/neistow/ruby-on-snails/tree/lab-10)
+11. [Lab-11](https://github.com/neistow/ruby-on-snails/tree/lab-11)
