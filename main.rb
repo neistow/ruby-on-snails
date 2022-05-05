@@ -1,62 +1,29 @@
-module TeamRole
-  TEAMLEAD = 1
-  BACKEND = 2
-  FRONTEND = 3
-  QA = 4
-  DESIGNER = 5
-end
-
-class Unit
-  class Employee
-    def initialize(name, surname, role)
-	@name = name
-	@surname = surname
-	@role = role
-    end
-   
-    def to_s
-      "#{@name} #{@surname} #{@role}"
-    end
-
-    attr_reader :name, :surname, :role
-  end
-  
-  def initialize
-    @employees = []
-  end
-
-  def add_employee(employee)
-    @employees.push(employee)
-  end
-  
-  def remove_employee(employee)
-    @employees.delete(employee)
-  end
-
-  def get_by_id(id)
-    return @employees.find(id)
-  end
-
-  def print(filter_by_role = nil)
-    puts @employees
-           .sort { |a, b| "#{a.name} #{a.surname}" <=> "#{b.name} #{b.surname}"}
-           .select { |emp| filter_by_role == nil ? true : emp.role == filter_by_role }
+class Integer
+  def to_a(base = 2)
+    return to_s(base).to_str.split("")
   end
 end
 
-unit = Unit.new
-emp1 = Unit::Employee.new('bb', 'bb', TeamRole::QA)
 
-unit.add_employee(emp1)
-unit.print
+new_books = {}
+old_books = {
+  'Design Patterns in Ruby' => ['Russ Olsen'],
+  'Eloquent Ruby' => ['Russ Olsen'],
+  'The Well-Grounded Rubyist' => ['David A. Black'],
+  'The Ruby Programming Language' => ['David Flanagan', 'Yukihiro Matsumoto'],
+  'Metaprogramming Ruby 2' => ['Paolo Perrotta'],
+  'Ruby Cookbook' => ['Lucas Carlson', 'Leonard Richardson'],
+  'Ruby Under a Microscope' => ['Pat Shaughnessy'],
+  'Ruby Performance Optimization' => ['Alexander Dymo'],
+  'The Ruby Way' => ['Hal Fulton', 'Andre Arko']
+}.each do |key|
+  key[1].each do |val|
+    if new_books.key?(val)
+      new_books[val] += 1
+    else
+      new_books[val] = 1
+    end
+  end
+end
 
-puts '------'
-
-emp2 = Unit::Employee.new('aa', 'aa', TeamRole::TEAMLEAD)
-unit.add_employee(emp2)
-
-unit.print(TeamRole::TEAMLEAD)
-
-puts '------'
-
-unit.print
+puts new_books.sort_by { |x| x[1]}
