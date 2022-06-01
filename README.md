@@ -1,7 +1,24 @@
-# Ruby lab works
+# README
 
-1. [Lab-1](https://github.com/neistow/ruby-on-snails/tree/lab-1)
-2. [Lab-2](https://github.com/neistow/ruby-on-snails/tree/lab-2)
-3. [Lab-3](https://github.com/neistow/ruby-on-snails/tree/lab-3)
-4. [Lab-4](https://github.com/neistow/ruby-on-snails/tree/lab-4)
-5. [Lab-5](https://github.com/neistow/ruby-on-snails/tree/lab-5)
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
